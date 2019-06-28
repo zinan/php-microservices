@@ -1,0 +1,23 @@
+{
+  "pageNotFound": {
+    "httpCode": 404,
+    "pageTitle": "Page Not Found",
+    "pageMessage": "\"@errMessage\" Page Not Found!",
+    "pageDescription": "Page Not Found"
+  },
+  "classNotFound": {
+    "httpCode": 404,
+    "title": "Page Not Found",
+    "message": "Class not defined in model file: @errMessage "
+  },
+  "modeFileNotFound": {
+    "httpCode": 404,
+    "title": "Page Not Found",
+    "message": "Model file not found: @errMessage "
+  },
+  "viewFileNotFound": {
+    "httpCode": 404,
+    "title": "Page Not Found",
+    "message": "View file not found: @errMessage "
+  }
+}

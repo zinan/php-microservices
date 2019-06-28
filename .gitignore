@@ -1,0 +1,6 @@
+.idea
+*.lock
+vendor
+/database/mysql/*
+/database/postgres/*
+var

@@ -1,0 +1,90 @@
+version: "2"
+services:
+  postgres:
+    image: postgres
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: defaultPass+
+      PGDATA: /data/postgres
+    volumes:
+      - './postgres:/data/postgres'
+    ports:
+      - '5432:5432'
+    dns:
+      - 172.28.1.2
+    networks:
+      support_assessment-net:
+        ipv4_address: 172.28.1.21
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: mail@sinanturgut.com.tr
+      PGADMIN_DEFAULT_PASSWORD: defaultPass+
+    volumes:
+      - './pgadmin:/root/.pgadmin'
+    ports:
+      - '5433:80'
+    restart: always
+    dns:
+      - 172.28.1.2
+    links:
+      - postgres:postgres
+    networks:
+      support_assessment-net:
+        ipv4_address: 172.28.1.22
+  redis:
+    image: 'redis'
+    container_name: redis
+    environment:
+      - REDIS_DEFAULT_PASSWORD=defaultPass+
+      - MASTER_DEFAULT_PASSWORD=defaultPass+
+    ports:
+      - '6379:6379'
+    dns:
+      - 172.28.1.2
+    networks:
+      support_assessment-net:
+        ipv4_address: 172.28.1.23
+
+  mariadb:
+    image: 'mariadb:latest'
+    container_name: mariadb
+    dns:
+      - 172.28.1.2
+    volumes:
+      - './mysql/initdb/:/docker-entrypoint-initdb.d'
+      - './mysql/data/:/var/lib/mysql'
+    environment:
+      - MYSQL_ROOT_PASSWORD=defaultPass+
+      - MYSQL_DATABASE=root
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=defaultPass+
+    ports:
+      - '3306:3306'
+    networks:
+      support_assessment-net:
+        ipv4_address: 172.28.1.24
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    dns:
+      - 172.28.1.2
+    environment:
+      PMA_ARBITRARY: 1
+      MYSQL_USER: root
+      MYSQL_PASSWORD: defaultPass+
+      MYSQL_ROOT_PASSWORD: defaultPass+
+    ports:
+      - '3307:80'
+    links:
+      - 'mariadb:mariadb'
+    networks:
+      support_assessment-net:
+        ipv4_address: 172.28.1.25
+
+networks:
+  support_assessment-net:
+    external: true

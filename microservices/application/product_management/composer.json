@@ -1,0 +1,27 @@
+{
+    "name": "sinanturgut/productmanagement",
+    "description": "Product Management Service",
+    "homepage": "https://dev.sinanturgut.com.tr",
+    "require": {
+        "php": ">=7.0",
+        "vlucas/phpdotenv": "^2.4",
+        "phpmailer/phpmailer": "^6.0",
+        "sentry/sdk": "2.0.3",
+        "guzzlehttp/guzzle": "~6.0"
+    },
+    "config": {
+        "process-timeout" : 0,
+        "php": "7.0"
+    },
+    "scripts": {
+        "start": "php -S localhost:18002 -t src src/index.php"
+    },
+    "license": "LGPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Sinan Turgut",
+            "email": "mail@sinanturgut.com.tr"
+        }
+    ],
+    "minimum-stability": "dev"
+}

@@ -1,0 +1,36 @@
+{
+  "name": "sinanturgut/ordermanagement",
+  "description": "Order Management Service",
+  "homepage": "https://dev.sinanturgut.com.tr",
+  "require": {
+    "php": ">=7.0",
+    "vlucas/phpdotenv": "^2.4",
+    "guzzlehttp/guzzle": "~6.0",
+    "sentry/sdk": "2.0.3",
+    "php-amqplib/php-amqplib": "~2.6"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "OrderManagement\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "OrderTests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "test" : "vendor/bin/phpunit"
+  },
+  "license": "LGPL-3.0-or-later",
+  "authors": [
+    {
+      "name": "Sinan Turgut",
+      "email": "mail@sinanturgut.com.tr"
+    }
+  ],
+  "minimum-stability": "dev"
+}

@@ -1,0 +1,49 @@
+server {
+  listen 65333;
+
+  location / {
+    types {
+      application/json json;
+    }
+    default_type "application/json";
+    return 501 '{
+      "success": false,
+      "deploy": false,
+      "status": 501,
+      "body": {
+        "message": "No available upstream servers at current route from consul"
+      }
+    }';
+  }
+}
+
+{{range services}}
+  {{ if .Tags.Contains "backend" }}
+  upstream {{.Name}} {
+    least_conn;
+    {{range service .Name}}
+    server  {{.Address}}:{{.Port}} max_fails=3 fail_timeout=60 weight=1;
+    {{else}}server 127.0.0.1:65535;{{end}}
+  }
+  {{end}}
+{{end}}
+
+
+server {
+  listen 8081 default_server;
+
+  {{range services}}
+    {{ if .Tags.Contains "backend" }}
+
+  location /backend-service/{{.Name}}/ {
+    proxy_pass http://{{.Name}};
+
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+  }
+
+    {{end}}
+  {{end}}
+
+}

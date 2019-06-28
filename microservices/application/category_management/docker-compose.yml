@@ -1,0 +1,34 @@
+version: "2"
+services:
+  nginx:
+    image: nginx:1.10.1
+    volumes:
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+      - ./var/nginx-log/:/var/log/nginx
+    volumes_from:
+      - php
+    links:
+      - php:php
+    ports:
+      - 80
+    environment:
+      SERVICE_80_NAME: category_management
+      SERVICE_TAGS: backend
+    networks:
+      support_assessment-net:
+        ipv4_address: 172.28.1.51
+
+  php:
+    build: ./docker/php
+    volumes:
+      - ./:/var/www/html/
+    dns:
+      - 172.28.1.2
+      - 8.8.8.8
+    networks:
+      support_assessment-net:
+        ipv4_address: 172.28.1.52
+
+networks:
+  support_assessment-net:
+    external: true

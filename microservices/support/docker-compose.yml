@@ -1,0 +1,81 @@
+version: '2'
+services:
+  consul:
+    command: -server -bootstrap docker
+    image: progrium/consul:latest
+    ports:
+      - 8400:8400
+      - 8500:8500
+      - 8600:53/udp
+      - 53:53/udp
+    networks:
+      assessment-net:
+        ipv4_address: 172.28.1.2
+
+  registrator:
+    command: -ip=192.168.99.100 consul://consul:8500
+    image: gliderlabs/registrator:latest
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock
+    links:
+      - consul
+    networks:
+      assessment-net:
+        ipv4_address: 172.28.1.3
+
+  # Frontend load balancer and discovery
+  lb:
+    build: ./lb
+    links:
+      - consul
+    ports:
+      - 9080:80
+    environment:
+      CONSUL_URL: consul:8500
+      SERVICE_80_NAME: lb
+    volumes:
+      - ./lb/consul-template:/etc/consul-template
+    networks:
+      assessment-net:
+        ipv4_address: 172.28.1.4
+
+  # Backend Discovery service
+  lbbackend:
+    build: ./lbbackend
+    links:
+      - consul
+      - rabbitmq
+    ports:
+      - 8081:8081 # This port should not be open to the public internet
+    environment:
+      CONSUL_URL: consul:8500
+      SERVICE_8081_NAME: lbbackend
+    volumes:
+      - ./lbbackend/consul-template:/etc/consul-template
+    networks:
+      assessment-net:
+        ipv4_address: 172.28.1.5
+
+  # Message broker
+  rabbitmq:
+    image: rabbitmq:3.6-management
+    # command: semanage port -a -t http_port_t -p tcp 5672
+    environment:
+      #RABBITMQ_ERLANG_COOKIE: 'secret cookie here'
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: password
+      SERVICE_5672_NAME: rabbitmq
+      SERVICE_TAGS: amqp
+    ports:
+      - 5672:5672
+      - 15672:15672
+    networks:
+      assessment-net:
+        ipv4_address: 172.28.1.6
+
+networks:
+  assessment-net:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.28.0.0/16
