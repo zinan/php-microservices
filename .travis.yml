@@ -9,11 +9,11 @@ php:
   - 7.2
 
 before_script:
-    - cd microservices/application/user_management/
+    - cd microservices/application/category_management/
     - travis_retry composer self-update
     - travis_retry composer install --no-interaction --prefer-source --dev
   
 script:
-  - composer test tests/UserTestCase.php
+  - composer test tests/CategoryTestCase.php
   
 install: true
