@@ -7,7 +7,14 @@ services:
 
 php:
   - 7.2
+  
+before_install:
+  - composer self-update
 
+install:
+  - travis_retry composer install --no-interaction
+  - composer info -i
+  
 script:
   - microservices/application/user_management/vendor/bin/phpunit
   
