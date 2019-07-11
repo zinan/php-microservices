@@ -1,0 +1,9 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit colors="true" bootstrap="microservices/application/user_management/vendor/autoload.php">
+    <testsuites>
+        <testsuite name="Application Test Suite">
+            <directory>microservices/application/user_management/tests/</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
