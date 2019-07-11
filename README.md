@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/zinan/php-microservices.svg?branch=master)](https://travis-ci.org/zinan/php-microservices)
+
 # PHP Microservice Architecture
 
 Sample Microservices with Docker
