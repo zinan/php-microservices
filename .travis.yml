@@ -17,6 +17,6 @@ install:
   
 script:
   - cd microservices/application/user_management/
-  - vendor/bin/phpunit
+  - composer test
   
 install: true
