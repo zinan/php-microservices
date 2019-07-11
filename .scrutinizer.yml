@@ -1,16 +1,16 @@
 filter:
     excluded_paths: [ 'microservices/support/*', 
     'microservices/database/*', 
-    'application/category_management/vendor/*',
-    'application/comment_management/vendor/*',
-    'application/order_management/vendor/*',
-    'application/product_management/vendor/*',
-    'application/user_management/vendor/*',
-    'application/category_management/tests/*',
-    'application/comment_management/tests/*',
-    'application/order_management/tests/*',
-    'application/product_management/tests/*',
-    'application/user_management/tests/*'
+    'microservices/application/category_management/vendor/*',
+    'microservices/application/comment_management/vendor/*',
+    'microservices/application/order_management/vendor/*',
+    'microservices/application/product_management/vendor/*',
+    'microservices/application/user_management/vendor/*',
+    'microservices/application/category_management/tests/*',
+    'microservices/application/comment_management/tests/*',
+    'microservices/application/order_management/tests/*',
+    'microservices/application/product_management/tests/*',
+    'microservices/application/user_management/tests/*'
     ]
 
 before_commands:
