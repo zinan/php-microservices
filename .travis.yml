@@ -8,15 +8,12 @@ services:
 php:
   - 7.2
 
-install:
-  - travis_retry composer install --no-interaction
-  - composer info -i
-  
 before_script:
-  - composer self-update
+    - travis_retry composer self-update
+    - travis_retry composer install --no-interaction --prefer-source --dev
   
 script:
   - cd microservices/application/user_management/
-  - composer test
+  - phpunit tests/UserTestCase.php
   
 install: true
