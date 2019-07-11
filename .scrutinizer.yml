@@ -1,0 +1,34 @@
+filter:
+    excluded_paths: [ 'microservices/support/*', 
+    'microservices/database/*', 
+    'application/category_management/vendor/*',
+    'application/comment_management/vendor/*',
+    'application/order_management/vendor/*',
+    'application/product_management/vendor/*',
+    'application/user_management/vendor/*',
+    'application/category_management/tests/*',
+    'application/comment_management/tests/*',
+    'application/order_management/tests/*',
+    'application/product_management/tests/*',
+    'application/user_management/tests/*'
+    ]
+
+before_commands:
+    - "composer install --prefer-source --dev"
+
+tools:
+    php_code_sniffer:
+        enabled: true
+        config:
+            standard: PSR2
+    php_mess_detector:
+        enabled: true
+        config:
+            ruleset: phpmd.xml.dist
+    external_code_coverage:
+        enabled: false
+        timeout: 1200
+    php_cpd: true
+    php_pdepend: true
+    php_analyzer: true
+    sensiolabs_security_checker: true
