@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/zinan/php-microservices.svg?branch=master)](https://travis-ci.org/zinan/php-microservices)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/zinan/php-microservices/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/zinan/php-microservices/?branch=master)
 
 # PHP Microservice Architecture
 
