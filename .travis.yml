@@ -10,7 +10,6 @@ php:
   
 before_script:
   - composer self-update
-  - composer install
   
 script:
   - cd microservices/application/user_management/
