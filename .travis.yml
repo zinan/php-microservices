@@ -16,6 +16,6 @@ install:
   - composer info -i
   
 script:
-  - microservices/application/user_management/vendor/bin/phpunit
+  - ./microservices/application/user_management/vendor/bin/phpunit
   
 install: true
