@@ -6,7 +6,7 @@
         "php": ">=7.2",
         "slim/slim": "^3.9",
         "slim/php-view": "^2.0",
-        "illuminate/database": "^5.5",
+        "illuminate/database": "^8.23",
         "robmorgan/phinx": "dev-master#4c26aeb",
         "vlucas/phpdotenv": "^2.4",
         "tuupola/slim-jwt-auth": "^2.3",
